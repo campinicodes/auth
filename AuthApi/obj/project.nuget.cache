@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "zlAfCrq3lD4=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\acampini\\dev_projects\\auth\\AuthApi\\AuthApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\acampini\\.nuget\\packages\\bcrypt.net-next\\4.2.0\\bcrypt.net-next.4.2.0.nupkg.sha512",
+    "C:\\Users\\acampini\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.12\\microsoft.aspnetcore.openapi.10.0.12.nupkg.sha512",
+    "C:\\Users\\acampini\\.nuget\\packages\\microsoft.openapi\\2.12.0\\microsoft.openapi.2.12.0.nupkg.sha512"
+  ],
+  "logs": []
+}
