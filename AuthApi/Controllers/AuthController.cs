@@ -8,5 +8,5 @@ namespace AuthApi.Controllers;
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
-    
+
 }
