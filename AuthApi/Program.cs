@@ -3,32 +3,38 @@ using AuthApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
+// 1. Injeção de Serviços (Controllers e Swagger)
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(); // <--- REGISTRO OBRIGATÓRIO AQUI
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+// 2. DbContext com SQLite
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddCors(options => {
+// 3. Configuração de CORS para o Angular
+builder.Services.AddCors(options =>
+{
     options.AddPolicy("AllowAngular", policy =>
     {
         policy.WithOrigins("http://localhost:4200")
-        .AllowAnyHeader()
-        .AllowAnyMethod();  
+              .AllowAnyHeader()
+              .AllowAnyMethod();
     });
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// 4. Middlewares HTTP (Apenas no ambiente de Desenvolvimento ou sempre)
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "AuthApi v1");
+    });
 }
 
-app.UseHttpsRedirection();
 app.UseCors("AllowAngular");
 app.UseAuthorization();
 app.MapControllers();
